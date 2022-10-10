@@ -4,9 +4,10 @@
 
 from pokemon import Pokemon, PokemonType
 from ability import Ability
+import random
 
-bulbasaur = Pokemon('bulbasaur', 30, 350, PokemonType.GRASS)
-squirtle = Pokemon('squirtle', 20, 400, PokemonType.WATER)
+bulbasaur = Pokemon('bulbasaur', 25, 270, PokemonType.GRASS)
+squirtle = Pokemon('squirtle', 30, 400, PokemonType.WATER)
 charmander = Pokemon('charmander', 40, 300, PokemonType.FIRE)
 
 razor_leaf = Ability('razor_leaf', 5)
@@ -25,12 +26,16 @@ squirtle.learn(surf)
 squirtle.learn(hydro_cannon)
 
 
-
 def battle_arena(pretendent: Pokemon, champion: Pokemon):
-    while pretendent.current_hp >= 1 and champion.current_hp >= 1:
+    while pretendent.current_hp > 0 and champion.current_hp > 0:
         pretendent.attack(champion)
-        if champion.current_hp >= 1:
+        if champion.current_hp > 0:
             champion.attack(pretendent)
+    # print(f"{pretendent.name if pretendent.current_hp > 0 else champion.name} is the winner!")
+    if pretendent.current_hp > 0:
+        print(f'{pretendent.name} won that battle with {pretendent.current_hp} hp.')
+    else:
+        print(f'{champion.name} won that battle with {champion.current_hp} hp.')
 
 
 battle_arena(bulbasaur,squirtle)

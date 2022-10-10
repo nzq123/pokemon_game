@@ -12,21 +12,21 @@ class PokemonType(str, Enum):
 def multi_by_type(first, second):
     if first == PokemonType.WATER:
         if second == PokemonType.FIRE:
-            return 2
+            return 1.5
         elif second == PokemonType.WATER:
             return 1
         elif second == PokemonType.GRASS:
             return 0.5
     if first == PokemonType.GRASS:
         if second == PokemonType.WATER:
-            return 2
+            return 1.5
         elif second == PokemonType.GRASS:
             return 1
         elif second == PokemonType.FIRE:
             return 0.5
     if first == PokemonType.FIRE:
         if second == PokemonType.GRASS:
-            return 2
+            return 1.5
         elif second == PokemonType.FIRE:
             return 1
         elif second == PokemonType.WATER:
@@ -56,10 +56,13 @@ class Pokemon:
 
     def attack(self, other):
         attack = random.choice(self.abilities)
-        champ_dmg = ((self.damage + attack.damage) * 0.7) * multi_by_type(self.type, other.type)
-        other.current_hp = other.current_hp - champ_dmg
-        other.current_hp = max(other.current_hp, 0)
-        print(f'{self.name} is attacking {other.name} with {champ_dmg} damage. {other.name} is left with {other.current_hp} hp')
+        if self.hit_chance():
+            champ_dmg = ((self.damage + attack.damage) * 0.7) * multi_by_type(self.type, other.type)
+            other.current_hp = other.current_hp - champ_dmg
+            other.current_hp = max(other.current_hp, 0)
+            print(f'Attack from {self.name} was hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp')
+        else:
+            print(f'Attack from {self.name} was missed. {other.name} is left with {other.current_hp} hp')
 
     def heal(self):
         if self.current_hp + 10 > self.max_hp:
@@ -77,7 +80,11 @@ class Pokemon:
     def learn(self, ability):
         self.abilities.append(ability)
 
-
+    @staticmethod
+    def hit_chance():
+        tab = [1, 2, 3, 4]
+        chance = random.choice(tab)
+        return chance < 4
 
 
 
