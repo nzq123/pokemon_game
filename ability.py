@@ -5,8 +5,8 @@ class Ability:
         self.damage = damage
 
     def __str__(self):
-        return self.damage
+        return f'{self.name} with {self.damage} damage'
 
     def __repr__(self):
-        return self.damage
+        return f'{self.name} with {self.damage} damage'
 

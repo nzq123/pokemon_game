@@ -1,5 +1,4 @@
 from enum import Enum
-from ability import Ability
 import random
 
 
