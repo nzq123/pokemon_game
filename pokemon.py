@@ -41,6 +41,7 @@ class Pokemon:
         self.current_hp = max_hp
         self.type = type
         self.abilities = []
+        self.status = True
 
     # def __init__(self):
     #     self.name = 'Bulbasaur'
@@ -79,6 +80,10 @@ class Pokemon:
     def learn(self, ability):
         self.abilities.append(ability)
 
+    def change_status(self):
+        if self.current_hp == 0:
+            return False
+
     @staticmethod
     def hit_chance():
         tab = [1, 2, 3, 4]
@@ -87,11 +92,11 @@ class Pokemon:
 
     @classmethod
     def create(cls, settings):
-        new_pok = Pokemon(settings.get('name'), settings.get('damage'), settings.get('max_hp'), settings.get('type'))
+        new_pokemon = Pokemon(settings.get('name'), settings.get('damage'), settings.get('max_hp'), settings.get('type'))
         poke_abilities = settings.get('abilities')
         for ability in poke_abilities:
-            new_pok.learn(ability)
-        return new_pok
+            new_pokemon.learn(ability)
+        return new_pokemon
 
 
 

@@ -7,6 +7,7 @@ from ability import Ability
 from pokemons import *
 import random
 
+
 def battle_arena(pretendent: Pokemon, champion: Pokemon):
     while pretendent.current_hp > 0 and champion.current_hp > 0:
         pretendent.attack(champion)
@@ -14,50 +15,56 @@ def battle_arena(pretendent: Pokemon, champion: Pokemon):
             champion.attack(pretendent)
     # print(f"{pretendent.name if pretendent.current_hp > 0 else champion.name} is the winner!")
     if pretendent.current_hp > 0:
+        print()
         print(f'{pretendent.name} won that battle with {pretendent.current_hp} hp.')
+        print()
     else:
+        print()
         print(f'{champion.name} won that battle with {champion.current_hp} hp.')
+        print()
 
 def battleground():
-    poke_tab = []
-    pc_pokedex = pokedex.copy()
+    print('Choose 3 starting pokemons:')
+
+    for index, pokemon in enumerate(pokedex):
+        print(f"{index} = {pokemon['name']}")
+
+    player_game_pokedex = []
     for i in range(3):
-        poks = random.choice(pc_pokedex)
-        poke_tab.append(poks)
-        pc_pokedex.remove(poks)
-    enum_poks = enumerate(pokedex)
-    print('Available pokemons to add:')
-    for i, pokemon in enum_poks:
-        print(f'{int(i)} = {pokemon.name}')
-    player_pokedex = []
+        poke_num = int(input('Choose pokemon number to add to your hand: '))
+        player_game_pokedex.append(Pokemon.create(pokedex[poke_num]))
+
+    pc_game_pokedex = []
     for i in range(3):
-        poke_num = int(input('Choose pokemon number to add to your hand:'))
-        player_pokedex.append(pokedex[poke_num])
-    print('Choose pokemon to fight!')
-    enum_player_pokedex = enumerate(player_pokedex)
-    for i, pokemon in enum_player_pokedex:
-        print(f'{int(i)} = {pokemon.name}')
-    poke_start = int(input('Choose starting pokemon!:'))
-    poke_player = player_pokedex[poke_start]
-    player_pokedex.remove(poke_player)
-    print(poke_player.name)
-    poke1_pc = random.choice(poke_tab)
-    poke_tab.remove(poke1_pc)
-    battle_arena(poke_player, poke1_pc)
-    print(poke_player.current_hp)
-    print(poke1_pc.current_hp)
-    if poke_player.current_hp > 0:
-        poke2_pc = random.choice(poke_tab)
-        battle_arena(poke_player, poke2_pc)
-    if poke1_pc.current_hp > 0:
-        enum_player2 = enumerate(player_pokedex)
-        for i, pokemon in enum_player2:
-            print(f'{int(i)} = {pokemon.name}')
-        second_pok = int(input('Your pokemon lost the battle. Choose another pokemon'))
-        second_pok_fight = player_pokedex[second_pok]
-        battle_arena(poke1_pc, second_pok_fight)
+        pc_pok = random.choice(pokedex)
+        pc_game_pokedex.append(Pokemon.create(pc_pok))
+
+    print('Available pokemons to fight')
+    for index, pokemon in enumerate(player_game_pokedex):
+        print(f"{index} = {pokemon.name}")
+    first = int(input('Choose 1st pokemon to fight: '))
+
+    first_player_poke = player_game_pokedex[first]
+    first_pc_poke = random.choice(pc_game_pokedex)
+
+    while len(pc_game_pokedex) > 0 and len(player_game_pokedex) > 0:
+
+        battle_arena(first_player_poke, first_pc_poke)
+
+        if first_player_poke.current_hp > 0:
+            pc_game_pokedex.remove(first_pc_poke)
+            second_pc_poke = random.choice(pc_game_pokedex)
+            battle_arena(second_pc_poke, first_player_poke)
+
+        if first_pc_poke.current_hp > 0:
+            player_game_pokedex.remove(first_player_poke)
+            for i, pokemon in enumerate(player_game_pokedex):
+                print(f'{i} = {pokemon.name}')
+            second = int(input('Your pokemon lost the battle. Choose another pokemon'))
+            second_player_poke = player_game_pokedex[second]
+            battle_arena(second_player_poke, first_pc_poke)
 
 
-# battleground()
 
-print(Pokemon.create(chikorita))
+
+battleground()
