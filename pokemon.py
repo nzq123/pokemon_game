@@ -85,6 +85,17 @@ class Pokemon:
         chance = random.choice(tab)
         return chance < 4
 
+    @classmethod
+    def create(cls, settings):
+        new_pok = Pokemon(settings.get('name'), settings.get('damage'), settings.get('max_hp'), settings.get('type'))
+        poke_abilities = settings.get('abilities')
+        for ability in poke_abilities:
+            new_pok.learn(ability)
+        return new_pok
+
+
+
+
 
 
 

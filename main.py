@@ -58,4 +58,6 @@ def battleground():
         battle_arena(poke1_pc, second_pok_fight)
 
 
-battleground()
+# battleground()
+
+print(Pokemon.create(chikorita))

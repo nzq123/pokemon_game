@@ -1,15 +1,6 @@
 from pokemon import Pokemon, PokemonType
 from ability import Ability
 
-
-bulbasaur = Pokemon('bulbasaur', 25, 270, PokemonType.GRASS)
-squirtle = Pokemon('squirtle', 30, 400, PokemonType.WATER)
-charmander = Pokemon('charmander', 40, 300, PokemonType.FIRE)
-
-chikorita = Pokemon('chikorita', 25, 270, PokemonType.GRASS)
-totodile = Pokemon('totodile', 30, 400, PokemonType.WATER)
-cyndaquil = Pokemon('cyndaquil', 40, 300, PokemonType.FIRE)
-
 razor_leaf = Ability('razor_leaf', 5)
 frenzy_plant = Ability('frenzy_plant', 40)
 grass_knot = Ability('grass_knot', 25)
@@ -22,23 +13,21 @@ overheat = Ability('overheat', 10)
 blast_burn = Ability('blast_burn', 45)
 flamethrower = Ability('flamethrower', 15)
 
-bulbasaur.learn(razor_leaf)
-bulbasaur.learn(frenzy_plant)
+# bulbasaur = Pokemon('bulbasaur', 25, 270, PokemonType.GRASS)
+# squirtle = Pokemon('squirtle', 30, 400, PokemonType.WATER)
+# charmander = Pokemon('charmander', 40, 300, PokemonType.FIRE)
 
-squirtle.learn(surf)
-squirtle.learn(hydro_cannon)
+bulbasaur = {'name': 'bulbasaur', 'damage': 25, 'max_hp': 270, 'type': PokemonType.GRASS, 'abilities': [razor_leaf, frenzy_plant]}
+squirtle = {'name': 'squirtle', 'damage': 30, 'max_hp': 400, 'type': PokemonType.WATER, 'abilities': [surf, hydro_cannon]}
+charmander = {'name': 'charmander', 'damage': 40, 'max_hp': 300, 'type': PokemonType.FIRE, 'abilities': [flamethrower, blast_burn]}
 
-charmander.learn(flamethrower)
-charmander.learn(blast_burn)
+# chikorita = Pokemon('chikorita', 25, 270, PokemonType.GRASS)
+# totodile = Pokemon('totodile', 30, 400, PokemonType.WATER)
+# cyndaquil = Pokemon('cyndaquil', 40, 300, PokemonType.FIRE)
 
-chikorita.learn(grass_knot)
-chikorita.learn(frenzy_plant)
-
-totodile.learn(water_gun)
-totodile.learn(surf)
-
-cyndaquil.learn(blast_burn)
-cyndaquil.learn(overheat)
+chikorita = {'name': 'chikorita', 'damage': 25, 'max_hp': 270, 'type': PokemonType.GRASS, 'abilities': [grass_knot, frenzy_plant]}
+totodile = {'name': 'totodile', 'damage': 30, 'max_hp': 400, 'type': PokemonType.WATER, 'abilities': [water_gun, surf]}
+cyndaquil = {'name': 'cyndaquil', 'damage': 40, 'max_hp': 300, 'type': PokemonType.FIRE, 'abilities': [blast_burn, overheat]}
 
 
 
