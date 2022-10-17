@@ -80,9 +80,8 @@ class Pokemon:
     def learn(self, ability):
         self.abilities.append(ability)
 
-    def change_status(self):
-        if self.current_hp == 0:
-            return False
+    def is_alive(self, pokemon):
+        return pokemon.current_hp > 0
 
     @staticmethod
     def hit_chance():
