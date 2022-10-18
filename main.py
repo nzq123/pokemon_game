@@ -20,6 +20,7 @@ def battle_arena(pretendent: Pokemon, champion: Pokemon):
 
 
 def battleground():
+
     print('Choose 3 starting pokemons:')
 
     for index, pokemon in enumerate(pokedex):

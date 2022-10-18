@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from pokemons import *
+from pokemon import Pokemon
 import random
 
 
