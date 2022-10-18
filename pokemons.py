@@ -1,4 +1,4 @@
-from pokemon import Pokemon, PokemonType
+from pokemon import PokemonType
 from ability import Ability
 
 razor_leaf = Ability('razor_leaf', 5)
