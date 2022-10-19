@@ -1,12 +1,23 @@
+from enum import Enum
+
+
+class AbilityType(str, Enum):
+    WATER = 'water'
+    FIRE = 'fire'
+    GRASS = 'grass'
+
+
 class Ability:
 
-    def __init__(self, name, damage):
+    def __init__(self, name, damage, type):
         self.name = name
         self.damage = damage
+        self.type = type
 
     def __str__(self):
         return f'{self.name} with {self.damage} damage'
 
     def __repr__(self):
         return f'{self.name} with {self.damage} damage'
+
 

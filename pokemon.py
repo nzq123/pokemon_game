@@ -57,9 +57,11 @@ class Pokemon:
         attack = random.choice(self.abilities)
         if self.hit_chance():
             champ_dmg = round(((self.damage + attack.damage) * 0.7) * multi_by_type(self.type, other.type), 3)
+            if self.type == attack.type:
+                champ_dmg *= 1.5
             other.current_hp = other.current_hp - champ_dmg
             other.current_hp = max(other.current_hp, 0)
-            print(f'Attack from {self.name} was hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp')
+            print(f'Attack from {self.name} ({attack.name}) was hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp')
         else:
             print(f'Attack from {self.name} was missed. {other.name} is left with {other.current_hp} hp')
 
