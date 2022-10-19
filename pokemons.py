@@ -13,7 +13,7 @@ overheat = Ability('overheat', 10, AbilityType.FIRE)
 blast_burn = Ability('blast_burn', 45, AbilityType.FIRE)
 flamethrower = Ability('flamethrower', 15, AbilityType.FIRE)
 
-bulbasaur = {'name': 'bulbasaur', 'damage': 25, 'max_hp': 270, 'type': PokemonType.GRASS, 'abilities': [razor_leaf, frenzy_plant]}
+bulbasaur = {'name': 'bulbasaur', 'damage': 25, 'max_hp': 270, 'type': [PokemonType.GRASS, PokemonType.WATER], 'abilities': [razor_leaf, frenzy_plant]}
 squirtle = {'name': 'squirtle', 'damage': 30, 'max_hp': 400, 'type': PokemonType.WATER, 'abilities': [surf, hydro_cannon]}
 charmander = {'name': 'charmander', 'damage': 40, 'max_hp': 300, 'type': PokemonType.FIRE, 'abilities': [flamethrower, blast_burn]}
 

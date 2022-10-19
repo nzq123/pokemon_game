@@ -1,4 +1,5 @@
 from enum import Enum
+from ability import AbilityType
 import random
 
 
@@ -8,28 +9,33 @@ class PokemonType(str, Enum):
     GRASS = 'grass'
 
 
-def multi_by_type(first, second):
-    if first == PokemonType.WATER:
-        if second == PokemonType.FIRE:
-            return 1.5
-        elif second == PokemonType.WATER:
-            return 1
-        elif second == PokemonType.GRASS:
-            return 0.5
-    if first == PokemonType.GRASS:
-        if second == PokemonType.WATER:
-            return 1.5
-        elif second == PokemonType.GRASS:
-            return 1
-        elif second == PokemonType.FIRE:
-            return 0.5
-    if first == PokemonType.FIRE:
-        if second == PokemonType.GRASS:
-            return 1.5
-        elif second == PokemonType.FIRE:
-            return 1
-        elif second == PokemonType.WATER:
-            return 0.5
+def multi_by_type(attack_type, poke_types):
+
+    res = 1
+
+    grass = {PokemonType.FIRE: 0.5, PokemonType.WATER: 2, PokemonType.GRASS: 1}
+    water = {PokemonType.FIRE: 2, PokemonType.WATER: 1, PokemonType.GRASS: 0.5}
+    fire = {PokemonType.FIRE: 1, PokemonType.WATER: 0.5, PokemonType.GRASS: 2}
+    types = {AbilityType.GRASS: grass, AbilityType.WATER: water, AbilityType.FIRE: fire}
+
+    if attack_type in types:
+        for key, value in attack_type:
+            if key in poke_types:
+                res *= value
+
+    #
+    # for key, value in types:
+    #     if key == attack_type:
+    #         for i in key.values():
+    #
+    #     if attack_type == AbilityType.GRASS:
+    #         for poke_type in poke_types:
+    #             if poke_type == PokemonType.FIRE:
+    #                 res *= 0.5
+    #             if poke_type == PokemonType.WATER:
+    #                 res *= 1.5
+    #             if poke_type == PokemonType.GRASS:
+    #                 res *= 1
 
 
 class Pokemon:
