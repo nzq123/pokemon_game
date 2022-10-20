@@ -7,19 +7,20 @@ class PokemonType(str, Enum):
     WATER = 'water'
     FIRE = 'fire'
     GRASS = 'grass'
+    ICE = 'ice'
+    GROUND = 'ground'
+    POISON = 'poison'
 
 
 def multi_by_type(attack_type, poke_types):
-    grass = {PokemonType.FIRE: 0.5, PokemonType.WATER: 2, PokemonType.GRASS: 1}
-    water = {PokemonType.FIRE: 2, PokemonType.WATER: 1, PokemonType.GRASS: 0.5}
-    fire = {PokemonType.FIRE: 1, PokemonType.WATER: 0.5, PokemonType.GRASS: 2}
-    types = {AbilityType.GRASS: grass, AbilityType.WATER: water, AbilityType.FIRE: fire}
+    grass = {PokemonType.FIRE: 0.5, PokemonType.WATER: 2, PokemonType.GRASS: 1, PokemonType. ICE: 0.5, PokemonType.GROUND: 2, PokemonType.POISON: 0.5}
+    water = {PokemonType.FIRE: 2, PokemonType.WATER: 1, PokemonType.GRASS: 0.5, PokemonType. ICE: 0.5, PokemonType.GROUND: 2, PokemonType.POISON: 1}
+    fire = {PokemonType.FIRE: 1, PokemonType.WATER: 0.5, PokemonType.GRASS: 2, PokemonType. ICE: 2, PokemonType.GROUND: 0.5, PokemonType.POISON: 1}
+    ice = {PokemonType.FIRE: 0.5, PokemonType.WATER: 0.5, PokemonType.GRASS: 2, PokemonType. ICE: 0.5, PokemonType.GROUND: 2, PokemonType.POISON: 1}
+    ground = {PokemonType.FIRE: 2, PokemonType.WATER: 1, PokemonType.GRASS: 1, PokemonType. ICE: 0.5, PokemonType.GROUND: 1, PokemonType.POISON: 2}
+    poison = {PokemonType.FIRE: 0.5, PokemonType.WATER: 0.5, PokemonType.GRASS: 2, PokemonType. ICE: 0.5, PokemonType.GROUND: 0.5, PokemonType.POISON: 1}
 
-    # for i, j in types.items():
-    #     if i == attack_type:
-    #         for m, k in j.items():
-    #             if m in poke_types:
-    #                 res *= k
+    types = {AbilityType.GRASS: grass, AbilityType.WATER: water, AbilityType.FIRE: fire, AbilityType.ICE: ice, AbilityType.GROUND: ground, AbilityType.POISON: poison}
 
     res = 1
     multi = types[attack_type]

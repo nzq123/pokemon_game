@@ -5,6 +5,10 @@ class AbilityType(str, Enum):
     WATER = 'water'
     FIRE = 'fire'
     GRASS = 'grass'
+    ICE = 'ice'
+    GROUND = 'ground'
+    POISON = 'poison'
+
 
 
 class Ability:
