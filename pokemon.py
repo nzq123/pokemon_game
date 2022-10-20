@@ -10,32 +10,22 @@ class PokemonType(str, Enum):
 
 
 def multi_by_type(attack_type, poke_types):
-
-    res = 1
-
     grass = {PokemonType.FIRE: 0.5, PokemonType.WATER: 2, PokemonType.GRASS: 1}
     water = {PokemonType.FIRE: 2, PokemonType.WATER: 1, PokemonType.GRASS: 0.5}
     fire = {PokemonType.FIRE: 1, PokemonType.WATER: 0.5, PokemonType.GRASS: 2}
     types = {AbilityType.GRASS: grass, AbilityType.WATER: water, AbilityType.FIRE: fire}
 
-    if attack_type in types:
-        for key, value in attack_type:
-            if key in poke_types:
-                res *= value
+    # for i, j in types.items():
+    #     if i == attack_type:
+    #         for m, k in j.items():
+    #             if m in poke_types:
+    #                 res *= k
 
-    #
-    # for key, value in types:
-    #     if key == attack_type:
-    #         for i in key.values():
-    #
-    #     if attack_type == AbilityType.GRASS:
-    #         for poke_type in poke_types:
-    #             if poke_type == PokemonType.FIRE:
-    #                 res *= 0.5
-    #             if poke_type == PokemonType.WATER:
-    #                 res *= 1.5
-    #             if poke_type == PokemonType.GRASS:
-    #                 res *= 1
+    res = 1
+    multi = types[attack_type]
+    for i in poke_types:
+        res *= multi[i]
+    return res
 
 
 class Pokemon:
@@ -62,9 +52,10 @@ class Pokemon:
     def attack(self, other):
         attack = random.choice(self.abilities)
         if self.hit_chance():
-            champ_dmg = round(((self.damage + attack.damage) * 0.7) * multi_by_type(self.type, other.type), 3)
-            if self.type == attack.type:
-                champ_dmg *= 1.5
+            champ_dmg = round(((self.damage + attack.damage) * 0.7) * multi_by_type(attack.type, other.type), 3)
+            for i in self.type:
+                if i == attack.type:
+                    champ_dmg *= 1.5
             other.current_hp = other.current_hp - champ_dmg
             other.current_hp = max(other.current_hp, 0)
             print(f'Attack from {self.name} ({attack.name}) was hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp')
