@@ -30,13 +30,18 @@ def multi_by_type(attack_type, poke_types):
 
 
 def did_hit(attack: Ability):
-    res = attack.accuracy / 2
+    hit_chance = attack.accuracy * 0.7
+    hit_range = random.randint(0, 100)
+    return hit_chance >= hit_range
+
+
+def is_hit_crt(attack: Ability):
+    crt_chance = attack.accuracy / 512 * 100
     crt_range = random.randint(0, 100)
-    return res <= crt_range
+    return crt_chance >= crt_range
 
 
 class Pokemon:
-
     def __init__(self, name, damage, max_hp, speed, type):
         self.name = name
         self.damage = damage
@@ -59,16 +64,22 @@ class Pokemon:
 
     def attack(self, other):
         attack = random.choice(self.abilities)
-        if did_hit(attack) is True:
+        crt_attack = is_hit_crt(attack)
+        if did_hit(attack):
             champ_dmg = (self.damage + attack.damage) * multi_by_type(attack.type, other.type)
             for i in self.type:
                 if i == attack.type:
                     champ_dmg *= 1.5
+            if crt_attack:
+                champ_dmg *= 2
             champ_dmg = round(champ_dmg, 3)
             other.current_hp = other.current_hp - champ_dmg
             other.current_hp = max(other.current_hp, 0)
             other.current_hp = round(other.current_hp, 3)
-            print(f'Attack from {self.name} ({attack.name}) was hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp')
+            if crt_attack:
+                print(f'Attack from {self.name} ({attack.name}) was critical hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp')
+            else:
+                print(f'Attack from {self.name} ({attack.name}) was hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp')
         else:
             print(f'Attack from {self.name} was missed. {other.name} is left with {other.current_hp} hp')
 
