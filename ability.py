@@ -12,9 +12,10 @@ class AbilityType(str, Enum):
 
 class Ability:
 
-    def __init__(self, name, damage, type):
+    def __init__(self, name, damage, accuracy, type):
         self.name = name
         self.damage = damage
+        self.accuracy = accuracy
         self.type = type
 
     def __str__(self):

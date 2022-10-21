@@ -1,5 +1,5 @@
 from enum import Enum
-from ability import AbilityType
+from ability import Ability, AbilityType
 import random
 
 
@@ -13,9 +13,9 @@ class PokemonType(str, Enum):
 
 
 def multi_by_type(attack_type, poke_types):
-    grass = {PokemonType.FIRE: 0.5, PokemonType.WATER: 2, PokemonType.GRASS: 1, PokemonType. ICE: 0.5, PokemonType.GROUND: 2, PokemonType.POISON: 0.5}
-    water = {PokemonType.FIRE: 2, PokemonType.WATER: 1, PokemonType.GRASS: 0.5, PokemonType. ICE: 0.5, PokemonType.GROUND: 2, PokemonType.POISON: 1}
-    fire = {PokemonType.FIRE: 1, PokemonType.WATER: 0.5, PokemonType.GRASS: 2, PokemonType. ICE: 2, PokemonType.GROUND: 0.5, PokemonType.POISON: 1}
+    grass = {PokemonType.FIRE: 0.5, PokemonType.WATER: 2, PokemonType.GRASS: 0.5, PokemonType. ICE: 0.5, PokemonType.GROUND: 2, PokemonType.POISON: 0.5}
+    water = {PokemonType.FIRE: 2, PokemonType.WATER: 0.5, PokemonType.GRASS: 0.5, PokemonType. ICE: 0.5, PokemonType.GROUND: 2, PokemonType.POISON: 1}
+    fire = {PokemonType.FIRE: 0.5, PokemonType.WATER: 0.5, PokemonType.GRASS: 2, PokemonType. ICE: 2, PokemonType.GROUND: 0.5, PokemonType.POISON: 1}
     ice = {PokemonType.FIRE: 0.5, PokemonType.WATER: 0.5, PokemonType.GRASS: 2, PokemonType. ICE: 0.5, PokemonType.GROUND: 2, PokemonType.POISON: 1}
     ground = {PokemonType.FIRE: 2, PokemonType.WATER: 1, PokemonType.GRASS: 1, PokemonType. ICE: 0.5, PokemonType.GROUND: 1, PokemonType.POISON: 2}
     poison = {PokemonType.FIRE: 0.5, PokemonType.WATER: 0.5, PokemonType.GRASS: 2, PokemonType. ICE: 0.5, PokemonType.GROUND: 0.5, PokemonType.POISON: 1}
@@ -27,6 +27,12 @@ def multi_by_type(attack_type, poke_types):
     for i in poke_types:
         res *= multi[i]
     return res
+
+
+def did_hit(attack: Ability):
+    res = attack.accuracy / 2
+    crt_range = random.randint(0, 100)
+    return res <= crt_range
 
 
 class Pokemon:
@@ -53,8 +59,8 @@ class Pokemon:
 
     def attack(self, other):
         attack = random.choice(self.abilities)
-        if self.hit_chance():
-            champ_dmg = ((self.damage + attack.damage) * 0.7) * multi_by_type(attack.type, other.type)
+        if did_hit(attack) is True:
+            champ_dmg = (self.damage + attack.damage) * multi_by_type(attack.type, other.type)
             for i in self.type:
                 if i == attack.type:
                     champ_dmg *= 1.5
@@ -85,11 +91,6 @@ class Pokemon:
     def is_alive(self, pokemon):
         return pokemon.current_hp > 0
 
-    @staticmethod
-    def hit_chance():
-        tab = [1, 2, 3, 4]
-        chance = random.choice(tab)
-        return chance < 4
 
     @classmethod
     def create(cls, settings):
