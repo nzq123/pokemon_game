@@ -10,7 +10,6 @@ class AbilityType(str, Enum):
     POISON = 'poison'
 
 
-
 class Ability:
 
     def __init__(self, name, damage, type):

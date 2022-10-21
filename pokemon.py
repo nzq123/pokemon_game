@@ -31,11 +31,12 @@ def multi_by_type(attack_type, poke_types):
 
 class Pokemon:
 
-    def __init__(self, name, damage, max_hp, type):
+    def __init__(self, name, damage, max_hp, speed, type):
         self.name = name
         self.damage = damage
         self.max_hp = max_hp
         self.current_hp = max_hp
+        self.speed = speed
         self.type = type
         self.abilities = []
 
@@ -53,28 +54,30 @@ class Pokemon:
     def attack(self, other):
         attack = random.choice(self.abilities)
         if self.hit_chance():
-            champ_dmg = round(((self.damage + attack.damage) * 0.7) * multi_by_type(attack.type, other.type), 3)
+            champ_dmg = ((self.damage + attack.damage) * 0.7) * multi_by_type(attack.type, other.type)
             for i in self.type:
                 if i == attack.type:
                     champ_dmg *= 1.5
+            champ_dmg = round(champ_dmg, 3)
             other.current_hp = other.current_hp - champ_dmg
             other.current_hp = max(other.current_hp, 0)
+            other.current_hp = round(other.current_hp, 3)
             print(f'Attack from {self.name} ({attack.name}) was hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp')
         else:
             print(f'Attack from {self.name} was missed. {other.name} is left with {other.current_hp} hp')
 
-    def heal(self):
-        if self.current_hp + 10 > self.max_hp:
-            self.current_hp = self.max_hp
-        else:
-            self.current_hp += 10
-        print(f'{self.name} was healed to {self.current_hp} hp')
-
-    def train(self):
-        self.damage += 5
-        self.current_hp += 5
-        self.max_hp += 5
-        print(f'{self.name} was trained and now has {self.damage} damage and {self.current_hp} out of {self.max_hp} hp')
+    # def heal(self):
+    #     if self.current_hp + 10 > self.max_hp:
+    #         self.current_hp = self.max_hp
+    #     else:
+    #         self.current_hp += 10
+    #     print(f'{self.name} was healed to {self.current_hp} hp')
+    #
+    # def train(self):
+    #     self.damage += 5
+    #     self.current_hp += 5
+    #     self.max_hp += 5
+    #     print(f'{self.name} was trained and now has {self.damage} damage and {self.current_hp} out of {self.max_hp} hp')
 
     def learn(self, ability):
         self.abilities.append(ability)
@@ -90,7 +93,7 @@ class Pokemon:
 
     @classmethod
     def create(cls, settings):
-        new_pokemon = Pokemon(settings.get('name'), settings.get('damage'), settings.get('max_hp'), settings.get('type'))
+        new_pokemon = Pokemon(settings.get('name'), settings.get('damage'), settings.get('max_hp'), settings.get('speed'), settings.get('type'))
         poke_abilities = settings.get('abilities')
         for ability in poke_abilities:
             new_pokemon.learn(ability)

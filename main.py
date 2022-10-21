@@ -4,6 +4,8 @@ from player import PcPlayer, HumanPlayer
 
 
 def battle_arena(pretendent: Pokemon, champion: Pokemon):
+    if pretendent.speed < champion.speed:
+        pretendent, champion = champion, pretendent
     while pretendent.current_hp > 0 and champion.current_hp > 0:
         pretendent.attack(champion)
         if champion.current_hp > 0:
