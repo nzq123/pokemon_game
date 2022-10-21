@@ -55,10 +55,6 @@ def battleground():
                 new_player_pokemon = player.get_poke(player.game_pokedex)
             battle_arena(new_player_pokemon, old_pc_pokemon)
             old_player_pokemon = new_player_pokemon
-        # print('players')
-        # player.show_pokedex(player_game_pokedex)
-        # print('computers')
-        # computer.show_pokedex(pc_game_pokedex)
     if len(player.game_pokedex) == 0:
         print('Your all pokemons fainted. KEKW')
     else:

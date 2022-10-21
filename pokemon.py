@@ -83,19 +83,6 @@ class Pokemon:
         else:
             print(f'Attack from {self.name} was missed. {other.name} is left with {other.current_hp} hp')
 
-    # def heal(self):
-    #     if self.current_hp + 10 > self.max_hp:
-    #         self.current_hp = self.max_hp
-    #     else:
-    #         self.current_hp += 10
-    #     print(f'{self.name} was healed to {self.current_hp} hp')
-    #
-    # def train(self):
-    #     self.damage += 5
-    #     self.current_hp += 5
-    #     self.max_hp += 5
-    #     print(f'{self.name} was trained and now has {self.damage} damage and {self.current_hp} out of {self.max_hp} hp')
-
     def learn(self, ability):
         self.abilities.append(ability)
 
