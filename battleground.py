@@ -26,7 +26,7 @@ def starting_poke_player(player):
     return old_player_pokemon
 
 
-def starting_poke_comp(computer):
+def starting_poke_trainer(computer):
     old_pc_pokemon = computer.choose_pokemon(computer.game_pokedex)
     return old_pc_pokemon
 
@@ -38,17 +38,15 @@ def battleground(player, computer, old_player_pokemon, old_pc_pokemon):
             computer.remove_poke(old_pc_pokemon, computer.game_pokedex)
             if len(computer.game_pokedex) != 0:
                 new_computer_pokemon = computer.get_poke(computer.game_pokedex)
-            battle_arena(new_computer_pokemon, old_player_pokemon)
-            old_pc_pokemon = new_computer_pokemon
+                battle_arena(new_computer_pokemon, old_player_pokemon)
+                old_pc_pokemon = new_computer_pokemon
         else:
             print(f'Your pokemon({old_player_pokemon.name}) lost')
-            print(player.game_pokedex)
             player.remove_poke(old_player_pokemon, player.game_pokedex)
-            print(player.game_pokedex)
             if len(player.game_pokedex) != 0:
                 new_player_pokemon = player.get_poke(player.game_pokedex)
-            battle_arena(new_player_pokemon, old_pc_pokemon)
-            old_player_pokemon = new_player_pokemon
+                battle_arena(new_player_pokemon, old_pc_pokemon)
+                old_player_pokemon = new_player_pokemon
     if len(player.game_pokedex) == 0:
         print(f'Your pokemons lose with trainer {computer.name}. KEKW')
     else:

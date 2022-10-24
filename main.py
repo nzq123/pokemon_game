@@ -16,22 +16,22 @@ agatha = Trainer('agatha', [charmander, charmander, charmander])
 
 
 player.fill_pokedex()
-lorelei.fill_pokedex()
+
 
 a = starting_poke_player(player)
-b = starting_poke_comp(lorelei)
+b = starting_poke_trainer(lorelei)
 battle_arena(a, b)
 battleground(player, lorelei, a, b)
 if len(lorelei.game_pokedex) == 0:
-    lorelei = bruno
     bruno.fill_pokedex()
-    b = starting_poke_comp(bruno)
+    a = starting_poke_player(player)
+    b = starting_poke_trainer(bruno)
     battleground(player, bruno, a, b)
     battle_arena(a, b)
     if len(bruno.game_pokedex) == 0:
-        bruno = agatha
         agatha.fill_pokedex()
-        b = starting_poke_comp(agatha)
+        a = starting_poke_player(player)
+        b = starting_poke_trainer(agatha)
         battleground(player, agatha, a, b)
         battle_arena(a, b)
 
