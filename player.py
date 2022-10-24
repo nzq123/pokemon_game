@@ -53,4 +53,18 @@ class PcPlayer(Player):
             self.game_pokedex.append(Pokemon.create(pc_pok))
 
 
+class Trainer(Player):
+    def __init__(self, name, poke_tab):
+        super().__init__(name)
+
+        for i in range(len(poke_tab)):
+            pc_pok = poke_tab[i]
+            self.game_pokedex.append(Pokemon.create(pc_pok))
+
+    def choose_pokemon(self, poke_list):
+        new_pokemon = poke_list[0]
+        return new_pokemon
+
+    def fill_pokedex(self):
+        pass
 
