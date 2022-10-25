@@ -30,11 +30,17 @@ class Player(ABC):
         pass
 
 
+
+
 class HumanPlayer(Player):
     def choose_pokemon(self, poke_list):
-        self.show_pokedex(poke_list)
+        alive_pokemons = []
+        for pokemon in poke_list:
+            if pokemon.current_hp > 0:
+                alive_pokemons.append(pokemon)
+        self.show_pokedex(alive_pokemons)
         new_pokemon = int(input('Choose pokemon: '))
-        return poke_list[new_pokemon]
+        return alive_pokemons[new_pokemon]
 
     def fill_pokedex(self):
         for i in range(3):
@@ -44,7 +50,11 @@ class HumanPlayer(Player):
 
 class PcPlayer(Player):
     def choose_pokemon(self, poke_list):
-        new_pokemon = random.choice(poke_list)
+        alive_pokemons = []
+        for pokemon in poke_list:
+            if pokemon.current_hp > 0:
+                alive_pokemons.append(pokemon)
+        new_pokemon = random.choice(alive_pokemons)
         return new_pokemon
 
     def fill_pokedex(self):
@@ -62,8 +72,9 @@ class Trainer(Player):
             self.game_pokedex.append(Pokemon.create(pc_pok))
 
     def choose_pokemon(self, poke_list):
-        new_pokemon = poke_list[0]
-        return new_pokemon
+        for pokemon in poke_list:
+            if pokemon.current_hp > 0:
+                return pokemon
 
     def fill_pokedex(self):
         pass
