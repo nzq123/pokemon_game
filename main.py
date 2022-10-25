@@ -14,14 +14,12 @@ lorelei = Trainer('lorelei', [bulbasaur, bulbasaur, bulbasaur])
 bruno = Trainer('bruno', [bulbasaur, bulbasaur, bulbasaur])
 agatha = Trainer('agatha', [charmander, charmander, charmander])
 
+trainers = [lorelei, bruno, agatha]
 
 player.fill_pokedex()
 
-battleground(player, lorelei)
-if len(lorelei.game_pokedex) == 0:
-    bruno.fill_pokedex()
-    battleground(player, bruno)
-    if len(bruno.game_pokedex) == 0:
-        agatha.fill_pokedex()
-        battleground(player, agatha)
+
+for i in range(len(trainers)):
+    battleground(player, trainers[i])
+
 
