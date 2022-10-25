@@ -11,17 +11,16 @@ class AbilityType(str, Enum):
 
 
 class Ability:
-
-    def __init__(self, name, damage, accuracy, type):
+    def __init__(self, name: str, damage: float, accuracy: int, type: AbilityType) -> None:
         self.name = name
         self.damage = damage
         self.accuracy = accuracy
         self.type = type
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.name} with {self.damage} damage'
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'{self.name} with {self.damage} damage'
 
 
