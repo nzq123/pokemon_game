@@ -30,8 +30,6 @@ class Player(ABC):
         pass
 
 
-
-
 class HumanPlayer(Player):
     def choose_pokemon(self, poke_list):
         alive_pokemons = []

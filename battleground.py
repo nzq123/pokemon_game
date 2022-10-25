@@ -3,7 +3,7 @@ from player import Player
 
 
 def battle_arena(pretendent: Pokemon, champion: Pokemon):
-    if pretendent != None and champion != None:
+    if pretendent.is_alive(pretendent) and champion.is_alive(champion):
         if pretendent.speed < champion.speed:
             pretendent, champion = champion, pretendent
         while pretendent.current_hp > 0 and champion.current_hp > 0:
