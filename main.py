@@ -19,5 +19,8 @@ player.fill_pokedex()
 
 
 for trainer in trainers:
-    print(f'Now you are fighting with {trainer.name.capitalize()} !')
-    battleground(player, trainer)
+    if player.can_fight():
+        print(f'Now you are fighting with {trainer.name.capitalize()} !')
+        battleground(player, trainer)
+    else:
+        break

@@ -19,9 +19,6 @@ class Player(ABC):
     def choose_pokemon(self) -> Optional[Pokemon]:
         pass
 
-    def remove_poke(self, pokemon: Pokemon, poke_list: List[Pokemon]) -> None:
-        poke_list.remove(pokemon)
-
     @abstractmethod
     def fill_pokedex(self) -> None:
         pass
@@ -43,7 +40,7 @@ class HumanPlayer(Player):
             poke_num = int(input("Choose pokemon number to add to your hand: "))
             self.game_pokedex.append(Pokemon.create(pokedex[poke_num]))
 
-    def can_fight(self):
+    def can_fight(self) -> bool:
         for pokemon in self.game_pokedex:
             if pokemon.is_alive():
                 return True

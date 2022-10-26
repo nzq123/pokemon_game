@@ -12,20 +12,10 @@ def battle_arena(pretendent: Pokemon, champion: Pokemon) -> None:
                 champion.attack(pretendent)
 
 
-def starting_poke_player(player: Player) -> Pokemon:
-    print("Choose one starting pokemon: ")
-    old_player_pokemon = player.choose_pokemon(player.game_pokedex)
-    return old_player_pokemon
-
-
-def starting_poke_trainer(computer: Player) -> Pokemon:
-    old_pc_pokemon = computer.choose_pokemon(computer.game_pokedex)
-    return old_pc_pokemon
-
-
 def battleground(player: Player, computer: Player):
-    old_player_pokemon = starting_poke_player(player)
-    old_pc_pokemon = starting_poke_trainer(computer)
+    print("Choose one starting pokemon: ")
+    old_player_pokemon = player.choose_pokemon()
+    old_pc_pokemon = computer.choose_pokemon()
     player_score = 0
     computer_score = 0
     while player_score != 3 and computer_score != 3:
@@ -36,13 +26,13 @@ def battleground(player: Player, computer: Player):
             print(f"Your pokemon({old_player_pokemon.name}) wins")
             computer_score += 1
             if computer_score != 3:
-                new_computer_pokemon = computer.get_poke(computer.game_pokedex)
+                new_computer_pokemon = computer.choose_pokemon()
                 old_pc_pokemon = new_computer_pokemon
         else:
             print(f"Your pokemon({old_player_pokemon.name}) lost")
             player_score += 1
             if player_score != 3:
-                new_player_pokemon = player.get_poke(player.game_pokedex)
+                new_player_pokemon = player.choose_pokemon()
                 old_player_pokemon = new_player_pokemon
     if player_score == 3:
         print(f"Your pokemons lose with trainer {computer.name}. KEKW")
