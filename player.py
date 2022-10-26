@@ -16,12 +16,8 @@ class Player(ABC):
             print(f"{index} = {pokemon.name}")
 
     @abstractmethod
-    def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
+    def choose_pokemon(self) -> Optional[Pokemon]:
         pass
-
-    def get_poke(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
-        new_pokemon = self.choose_pokemon(poke_list)
-        return new_pokemon
 
     def remove_poke(self, pokemon: Pokemon, poke_list: List[Pokemon]) -> None:
         poke_list.remove(pokemon)
@@ -32,9 +28,9 @@ class Player(ABC):
 
 
 class HumanPlayer(Player):
-    def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
+    def choose_pokemon(self) -> Optional[Pokemon]:
         alive_pokemons = []
-        for pokemon in poke_list:
+        for pokemon in self.game_pokedex:
             if pokemon.is_alive():
                 alive_pokemons.append(pokemon)
         self.show_pokedex(alive_pokemons)
@@ -42,17 +38,22 @@ class HumanPlayer(Player):
             new_pokemon = int(input("Choose pokemon: "))
             return alive_pokemons[new_pokemon]
 
-
     def fill_pokedex(self) -> None:
         for i in range(3):
             poke_num = int(input("Choose pokemon number to add to your hand: "))
             self.game_pokedex.append(Pokemon.create(pokedex[poke_num]))
 
+    def can_fight(self):
+        for pokemon in self.game_pokedex:
+            if pokemon.is_alive():
+                return True
+        return False
+
 
 class PcPlayer(Player):
-    def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
+    def choose_pokemon(self) -> Optional[Pokemon]:
         alive_pokemons = []
-        for pokemon in poke_list:
+        for pokemon in self.game_pokedex:
             if pokemon.is_alive():
                 alive_pokemons.append(pokemon)
         new_pokemon = random.choice(alive_pokemons)
@@ -72,8 +73,8 @@ class Trainer(Player):
             pc_pok = poke_tab[i]
             self.game_pokedex.append(Pokemon.create(pc_pok))
 
-    def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
-        for pokemon in poke_list:
+    def choose_pokemon(self) -> Optional[Pokemon]:
+        for pokemon in self.game_pokedex:
             if pokemon.is_alive():
                 return pokemon
 
