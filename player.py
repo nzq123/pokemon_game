@@ -35,12 +35,13 @@ class HumanPlayer(Player):
     def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
         alive_pokemons = []
         for pokemon in poke_list:
-            if pokemon.current_hp > 0:
+            if pokemon.is_alive():
                 alive_pokemons.append(pokemon)
         self.show_pokedex(alive_pokemons)
         if len(alive_pokemons) != 0:
             new_pokemon = int(input("Choose pokemon: "))
             return alive_pokemons[new_pokemon]
+
 
     def fill_pokedex(self) -> None:
         for i in range(3):
@@ -52,7 +53,7 @@ class PcPlayer(Player):
     def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
         alive_pokemons = []
         for pokemon in poke_list:
-            if pokemon.current_hp > 0:
+            if pokemon.is_alive():
                 alive_pokemons.append(pokemon)
         new_pokemon = random.choice(alive_pokemons)
         return new_pokemon
@@ -73,7 +74,7 @@ class Trainer(Player):
 
     def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
         for pokemon in poke_list:
-            if pokemon.current_hp > 0:
+            if pokemon.is_alive():
                 return pokemon
 
     def fill_pokedex(self) -> None:

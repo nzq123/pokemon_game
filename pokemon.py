@@ -143,8 +143,8 @@ class Pokemon:
     def learn(self, ability: Ability) -> None:
         self.abilities.append(ability)
 
-    def is_alive(self, pokemon: Pokemon) -> bool:
-        return pokemon.current_hp > 0
+    def is_alive(self) -> bool:
+        return self.current_hp > 0
 
     @classmethod
     def create(cls, settings) -> Pokemon:

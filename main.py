@@ -11,12 +11,13 @@ for index, pokemon in enumerate(pokedex):
 player = HumanPlayer("robi")
 lorelei = Trainer("lorelei", [bulbasaur, bulbasaur, bulbasaur])
 bruno = Trainer("bruno", [bulbasaur, bulbasaur, bulbasaur])
-agatha = Trainer("agatha", [charmander, charmander, charmander])
+agatha = Trainer("agatha", [bulbasaur, bulbasaur, bulbasaur])
 
 trainers = [lorelei, bruno, agatha]
 
 player.fill_pokedex()
 
 
-for i in range(len(trainers)):
-    battleground(player, trainers[i])
+for trainer in trainers:
+    print(f'Now you are fighting with {trainer.name.capitalize()} !')
+    battleground(player, trainer)
