@@ -23,6 +23,12 @@ class Player(ABC):
     def fill_pokedex(self) -> None:
         pass
 
+    def can_fight(self) -> bool:
+        for pokemon in self.game_pokedex:
+            if pokemon.is_alive():
+                return True
+        return False
+
 
 class HumanPlayer(Player):
     def choose_pokemon(self) -> Optional[Pokemon]:
@@ -39,12 +45,6 @@ class HumanPlayer(Player):
         for i in range(3):
             poke_num = int(input("Choose pokemon number to add to your hand: "))
             self.game_pokedex.append(Pokemon.create(pokedex[poke_num]))
-
-    def can_fight(self) -> bool:
-        for pokemon in self.game_pokedex:
-            if pokemon.is_alive():
-                return True
-        return False
 
 
 class PcPlayer(Player):
