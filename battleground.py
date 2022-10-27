@@ -27,6 +27,6 @@ def battleground(player: HumanPlayer, computer: Player):
             new_player_pokemon = player.choose_pokemon()
             old_player_pokemon = new_player_pokemon
     if player.can_fight():
-        print(f"Your pokemons win with trainer {computer.name}. PogU")
+        print(f"Your pokemons win with {computer.name}. PogU")
     else:
-        print(f"Your pokemons lose with trainer {computer.name}. KEKW")
+        print(f"Your pokemons lose with {computer.name}. KEKW")

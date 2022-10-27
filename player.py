@@ -20,7 +20,7 @@ class Player(ABC):
         pass
 
     @abstractmethod
-    def fill_pokedex(self) -> None:
+    def fill_pokedex(self, num) -> None:
         pass
 
     def can_fight(self) -> bool:
@@ -41,8 +41,8 @@ class HumanPlayer(Player):
             new_pokemon = int(input("Choose pokemon: "))
             return alive_pokemons[new_pokemon]
 
-    def fill_pokedex(self) -> None:
-        for i in range(3):
+    def fill_pokedex(self, num) -> None:
+        for i in range(num):
             poke_num = int(input("Choose pokemon number to add to your hand: "))
             self.game_pokedex.append(Pokemon.create(pokedex[poke_num]))
 
@@ -56,8 +56,8 @@ class PcPlayer(Player):
         new_pokemon = random.choice(alive_pokemons)
         return new_pokemon
 
-    def fill_pokedex(self) -> None:
-        for i in range(3):
+    def fill_pokedex(self, num) -> None:
+        for i in range(num):
             pc_pok = random.choice(pokedex)
             self.game_pokedex.append(Pokemon.create(pc_pok))
 
