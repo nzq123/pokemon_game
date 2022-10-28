@@ -146,6 +146,15 @@ class Pokemon:
     def is_alive(self) -> bool:
         return self.current_hp > 0
 
+    def revive(self):
+        if self.current_hp == 0:
+            self.current_hp = 1
+
+    def heal(self):
+        if self.current_hp != 0:
+            self.current_hp = self.max_hp
+
+
     @classmethod
     def create(cls, settings) -> Pokemon:
         new_pokemon = Pokemon(
