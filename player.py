@@ -75,5 +75,5 @@ class Trainer(Player):
             if pokemon.is_alive():
                 return pokemon
 
-    def fill_pokedex(self) -> None:
+    def fill_pokedex(self, num) -> None:
         pass
