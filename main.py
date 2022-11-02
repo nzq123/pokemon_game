@@ -6,8 +6,17 @@ from enum import Enum
 
 
 def adventure():
-    computer = PcPlayer("computer")
-    computer.fill_pokedex(1)
+    print('1. Grass 2. Lavender Town 3. Cerulean Cave')
+    craine = input('Choose land to adventure ')
+    if craine == '1':
+        computer = PcPlayer("computer")
+        computer.fill_pokedex(1, grass)
+    if craine == '2':
+        computer = PcPlayer("computer")
+        computer.fill_pokedex(1, land)
+    if craine == '3':
+        computer = PcPlayer("computer")
+        computer.fill_pokedex(1, cave)
     battle_arena(player.game_pokedex[0], computer.game_pokedex[0])
     if player.can_fight():
         print(f"Your pokemons win with {computer.game_pokedex[0].name}. PogU")
@@ -72,9 +81,9 @@ game_options = {1: ('Adventure', adventure), 2: ('Fight', fight), 3: ('Heal', he
 
 player = HumanPlayer("robi")
 print("Choose starter pokemon:")
-for index, pokemon in enumerate(pokedex):
+for index, pokemon in enumerate(grass):
     print(f"{index} = {pokemon['name']}")
-player.fill_pokedex(1)
+player.fill_pokedex(1, grass)
 print_options(game_options)
 ask_player = input('Type number what u want to do. ')
 while ask_player != '4':
