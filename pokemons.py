@@ -34,7 +34,7 @@ arcanine = {'name': 'arcanine', 'damage': 90, 'max_hp': 500, 'speed': 70,
 koffing = {'name': 'koffing', 'damage': 40, 'max_hp': 400, 'speed': 50,
            'type': [PokemonType.POISON], 'abilities': [frenzy_plant, hydro_cannon]}
 
-mewtwo = {'name': 'mewtwo', 'damage': 250, 'max_hp': 500, 'speed': 120,
+mewtwo = {'name': 'mewtwo', 'damage': 250, 'max_hp': 750, 'speed': 120,
           'type': [PokemonType.POISON], 'abilities': [hydro_cannon, blast_burn]}
 
 

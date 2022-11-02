@@ -17,25 +17,28 @@ def adventure():
     if craine == '3':
         computer = PcPlayer("computer")
         computer.fill_pokedex(1, cave)
-    battle_arena(player.game_pokedex[0], computer.game_pokedex[0])
     if player.can_fight():
-        print(f"Your pokemons win with {computer.game_pokedex[0].name}. PogU")
-    else:
-        print(f"Your pokemons lose with {computer.game_pokedex[0].name}. KEKW")
-    if computer.game_pokedex[0].is_alive() is False:
-        decision = input('1. Catch 2. Run ')
-        if decision == '1':
-            for i in range(3):
-                catch = random.randrange(0, 10)
-                if catch < 5:
-                    print(f"You catched wild {computer.game_pokedex[0].name}")
-                    player.game_pokedex.append(computer.game_pokedex[0])
-                    break
-                else:
-                    print(f"Wild {computer.game_pokedex[0].name} flies")
+        battle_arena(player.game_pokedex[0], computer.game_pokedex[0])
+        if player.can_fight():
+            print(f"Your pokemons win with {computer.game_pokedex[0].name}. PogU")
         else:
-            print(f'You escaped after battle!')
-    print(f'What a beatifull adventure with {player.game_pokedex[0].name}')
+            print(f"Your pokemons lose with {computer.game_pokedex[0].name}. KEKW")
+        if computer.game_pokedex[0].is_alive() is False:
+            decision = input('1. Catch 2. Run ')
+            if decision == '1':
+                for i in range(3):
+                    catch = random.randrange(0, 10)
+                    if catch < 5:
+                        print(f"You catched wild {computer.game_pokedex[0].name}")
+                        player.game_pokedex.append(computer.game_pokedex[0])
+                        break
+                    else:
+                        print(f"Wild {computer.game_pokedex[0].name} flies")
+            else:
+                print(f'You escaped after battle!')
+        print(f'What a beatifull adventure with {player.game_pokedex[0].name}')
+    else:
+        print('You have to heal your pokemons')
 
 
 def fight():
