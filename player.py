@@ -3,7 +3,6 @@ from abc import ABC, abstractmethod
 from typing import List, Optional
 
 from pokemon import Pokemon
-from pokemons import grass
 
 
 class Player(ABC):
@@ -19,15 +18,14 @@ class Player(ABC):
     def choose_pokemon(self) -> Optional[Pokemon]:
         pass
 
-    @abstractmethod
-    def fill_pokedex(self, num, pokedex) -> None:
-        pass
-
     def can_fight(self) -> bool:
         for pokemon in self.game_pokedex:
             if pokemon.is_alive():
                 return True
         return False
+
+    def get_pokemon(self, pokemon):
+        self.game_pokedex.append(pokemon)
 
 
 class HumanPlayer(Player):
@@ -41,10 +39,10 @@ class HumanPlayer(Player):
             new_pokemon = int(input("Choose pokemon: "))
             return alive_pokemons[new_pokemon]
 
-    def fill_pokedex(self, num, pokedex) -> None:
-        for i in range(num):
-            poke_num = int(input("Choose pokemon number to add to your hand: "))
-            self.game_pokedex.append(Pokemon.create(pokedex[poke_num]))
+    # def fill_pokedex(self, num, pokedex) -> None:
+    #     for i in range(num):
+    #         poke_num = int(input("Choose pokemon number to add to your hand: "))
+    #         self.game_pokedex.append(Pokemon.create(pokedex[poke_num]))
 
 
 class PcPlayer(Player):
@@ -55,11 +53,6 @@ class PcPlayer(Player):
                 alive_pokemons.append(pokemon)
         new_pokemon = random.choice(alive_pokemons)
         return new_pokemon
-
-    def fill_pokedex(self, num, pokedex) -> None:
-        for i in range(num):
-            pc_pok = random.choice(pokedex)
-            self.game_pokedex.append(Pokemon.create(pc_pok))
 
 
 class Trainer(Player):
@@ -75,5 +68,5 @@ class Trainer(Player):
             if pokemon.is_alive():
                 return pokemon
 
-    def fill_pokedex(self, num, pokedex) -> None:
-        pass
+
+

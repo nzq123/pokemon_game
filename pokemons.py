@@ -40,6 +40,6 @@ mewtwo = {'name': 'mewtwo', 'damage': 250, 'max_hp': 750, 'speed': 120,
 
 grass = [bulbasaur, squirtle, charmander, chikorita, totodile, cyndaquil]
 
-land = [lapras, arcanine, koffing]
+lake = [lapras, arcanine, koffing]
 
 cave = [mewtwo]
