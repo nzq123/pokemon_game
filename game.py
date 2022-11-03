@@ -18,21 +18,18 @@ def adventure(player):
     pokemon = select_random_pokemon(land)
 
     battle_arena(player.game_pokedex[0], pokemon)
-    if not player.can_fight():
+    if pokemon.is_alive():
         print(f"Your pokemons lose with {pokemon.name}. KEKW")
         return None
 
     print(f"Your pokemons win with {pokemon.name}. PogU")
     decision = input('1. Catch 2. Run ')
     if decision == '1':
-        for i in range(3):
-            catch = random.randrange(0, 10)
-            if catch < 5:
-                print(f"You catched wild {pokemon.name}")
-                player.game_pokedex.append(pokemon)
-                break
-            else:
-                print(f"Wild {pokemon.name} flies")
+        if is_successful_catch(pokemon):
+            print(f"You catched wild {pokemon.name}")
+            player.get_pokemon(pokemon)
+        else:
+            print(f"Wild {pokemon.name} flies!")
     else:
         print(f'You escaped after battle!')
 
@@ -88,6 +85,14 @@ def select_pokemon(pokedex):
 def select_random_pokemon(pokedex):
     pc_pok = random.choice(pokedex)
     return Pokemon.create(pc_pok)
+
+
+def is_successful_catch(pokemon):
+    for i in range(3):
+        catch = random.randrange(0, 10)
+        if catch < 5:
+            return True
+    return False
 
 
 game_options = {1: ('Adventure', adventure), 2: ('Fight', fight), 3: ('Heal', heal), 4: ('Quit', quit)}

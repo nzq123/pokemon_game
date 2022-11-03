@@ -39,11 +39,6 @@ class HumanPlayer(Player):
             new_pokemon = int(input("Choose pokemon: "))
             return alive_pokemons[new_pokemon]
 
-    # def fill_pokedex(self, num, pokedex) -> None:
-    #     for i in range(num):
-    #         poke_num = int(input("Choose pokemon number to add to your hand: "))
-    #         self.game_pokedex.append(Pokemon.create(pokedex[poke_num]))
-
 
 class PcPlayer(Player):
     def choose_pokemon(self) -> Optional[Pokemon]:
