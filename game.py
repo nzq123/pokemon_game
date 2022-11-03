@@ -7,39 +7,41 @@ import sys
 
 
 def adventure(player):
+    if not player.can_fight():
+        print('You have to heal your pokemons.')
+        return None
+
+    land_options = {1: grass, 2: lake, 3: cave}
     print('1. Grass 2. Lavender Town 3. Cerulean Cave')
-    land = input('Choose land to adventure ')
-    if land == '1':
-        pokemon = select_random_pokemon(grass)
-    if land == '2':
-        pokemon = select_random_pokemon(lake)
-    if land == '3':
-        pokemon = select_random_pokemon(cave)
-    if player.can_fight():
-        battle_arena(player.game_pokedex[0], pokemon)
-        if player.can_fight():
-            print(f"Your pokemons win with {pokemon.name}. PogU")
-        else:
-            print(f"Your pokemons lose with {pokemon.name}. KEKW")
-        if pokemon.is_alive() is False:
-            decision = input('1. Catch 2. Run ')
-            if decision == '1':
-                for i in range(3):
-                    catch = random.randrange(0, 10)
-                    if catch < 5:
-                        print(f"You catched wild {pokemon.name}")
-                        player.game_pokedex.append(pokemon)
-                        break
-                    else:
-                        print(f"Wild {pokemon} flies")
+    number = int(input('Choose land to adventure '))
+    land = land_options.get(number)
+    pokemon = select_random_pokemon(land)
+
+    battle_arena(player.game_pokedex[0], pokemon)
+    if not player.can_fight():
+        print(f"Your pokemons lose with {pokemon.name}. KEKW")
+        return None
+
+    print(f"Your pokemons win with {pokemon.name}. PogU")
+    decision = input('1. Catch 2. Run ')
+    if decision == '1':
+        for i in range(3):
+            catch = random.randrange(0, 10)
+            if catch < 5:
+                print(f"You catched wild {pokemon.name}")
+                player.game_pokedex.append(pokemon)
+                break
             else:
-                print(f'You escaped after battle!')
-        print(f'What a beatifull adventure with {player.game_pokedex[0].name}')
+                print(f"Wild {pokemon.name} flies")
     else:
-        print('You have to heal your pokemons')
+        print(f'You escaped after battle!')
 
 
 def fight(player):
+    if not player.can_fight():
+        print('You have to heal your pokemons.')
+        return None
+
     lorelei = Trainer("lorelei", [bulbasaur, bulbasaur, bulbasaur])
     bruno = Trainer("bruno", [bulbasaur, bulbasaur, bulbasaur])
     agatha = Trainer("agatha", [bulbasaur, bulbasaur, bulbasaur])

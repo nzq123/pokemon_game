@@ -1,4 +1,4 @@
-from player import HumanPlayer, Trainer, PcPlayer
+from player import HumanPlayer
 from game import Game
 
 player = HumanPlayer('robi')
