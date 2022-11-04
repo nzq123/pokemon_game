@@ -1,6 +1,6 @@
 from pokemons import *
 from pokemon import Pokemon
-from player import HumanPlayer, Trainer, PcPlayer
+from player import Trainer
 from battleground import battleground, battle_arena
 import random
 import sys
@@ -16,11 +16,17 @@ def adventure(player):
     number = int(input('Choose land to adventure '))
     land = land_options.get(number)
     pokemon = select_random_pokemon(land)
+    print(f'You encountered wild {pokemon.name}!')
 
-    battle_arena(player.game_pokedex[0], pokemon)
-    if pokemon.is_alive():
-        print(f"Your pokemons lose with {pokemon.name}. KEKW")
-        return None
+    player_pokemon = player.choose_pokemon()
+
+    battle_arena(player_pokemon, pokemon)
+    while pokemon.is_alive():
+        print(f"Your {player_pokemon.name} lost with {pokemon.name}. KEKW")
+        if not player.can_fight():
+            return None
+        player_pokemon = player.choose_pokemon()
+        battle_arena(player_pokemon, pokemon)
 
     print(f"Your pokemons win with {pokemon.name}. PogU")
     decision = input('1. Catch 2. Run ')
