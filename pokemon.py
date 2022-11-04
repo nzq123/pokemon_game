@@ -4,6 +4,7 @@ import random
 from enum import Enum
 from typing import List
 
+
 from ability import Ability, AbilityType
 
 
@@ -95,13 +96,14 @@ def is_hit_crt(attack: Ability) -> bool:
 
 
 class Pokemon:
-    def __init__(self, name: str, damage: float, max_hp: float, speed: float, type: PokemonType):
+    def __init__(self, name: str, damage: float, max_hp: float, speed: float, type: PokemonType, trainer: None):
         self.name = name
         self.damage = damage
         self.max_hp = max_hp
         self.current_hp = max_hp
         self.speed = speed
         self.type = type
+        self.trainer = trainer
         self.abilities: List[Ability] = []
 
     # def __init__(self):
@@ -116,12 +118,18 @@ class Pokemon:
         return f"{self.name} with {self.damage} attack and {self.current_hp} hp as {self.type} type with {self.abilities} abilities"
 
     def attack(self, other: Pokemon) -> None:
-        attack = random.choice(self.abilities)
-        crt_attack = is_hit_crt(attack)
-        if did_hit(attack):
-            champ_dmg = (self.damage + attack.damage) * multi_by_type(attack.type, other.type)
+        if self.trainer is not None:
+            for index, attack in enumerate(self.abilities):
+                print(f'{index}: {attack}')
+            num = int(input('Which attack u want to use '))
+            poke_attack = self.abilities[num]
+        else:
+            poke_attack = random.choice(self.abilities)
+        crt_attack = is_hit_crt(poke_attack)
+        if did_hit(poke_attack):
+            champ_dmg = (self.damage + poke_attack.damage) * multi_by_type(poke_attack.type, other.type)
             for i in self.type:
-                if i == attack.type:
+                if i == poke_attack.type:
                     champ_dmg *= 1.5
             if crt_attack:
                 champ_dmg *= 2
@@ -131,11 +139,11 @@ class Pokemon:
             other.current_hp = round(other.current_hp, 3)
             if crt_attack:
                 print(
-                    f"Attack from {self.name} ({attack.name}) was critical hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp"
+                    f"Attack from {self.name} ({poke_attack.name}) was critical hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp"
                 )
             else:
                 print(
-                    f"Attack from {self.name} ({attack.name}) was hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp"
+                    f"Attack from {self.name} ({poke_attack.name}) was hit for {champ_dmg} dmg. {other.name} is left with {other.current_hp} hp"
                 )
         else:
             print(f"Attack from {self.name} was missed. {other.name} is left with {other.current_hp} hp")
@@ -163,6 +171,7 @@ class Pokemon:
             settings.get("max_hp"),
             settings.get("speed"),
             settings.get("type"),
+            settings.get("trainer"),
         )
         poke_abilities = settings.get("abilities")
         for ability in poke_abilities:

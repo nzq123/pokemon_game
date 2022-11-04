@@ -12,13 +12,14 @@ def adventure(player):
         return None
 
     land_options = {1: grass, 2: lake, 3: cave}
-    print('1. Grass 2. Lavender Town 3. Cerulean Cave')
+    print('1: Grass 2: Lavender Town 3: Cerulean Cave')
     number = int(input('Choose land to adventure '))
     land = land_options.get(number)
     pokemon = select_random_pokemon(land)
     print(f'You encountered wild {pokemon.name}!')
 
     player_pokemon = player.choose_pokemon()
+    player_pokemon.trainer = player
 
     battle_arena(player_pokemon, pokemon)
     while pokemon.is_alive():
@@ -66,7 +67,7 @@ def heal(player):
             print(f"{index}: {pokemon.name} with {pokemon.current_hp} hp")
         ind_poke = int(input('Choose pokemon to revive or heal. '))
         hosp_poke = player.game_pokedex[ind_poke]
-        hospital_decision = input('1. Revive pokemon 2. Heal pokemon 3. Quit hospital. ')
+        hospital_decision = input('1: Revive pokemon 2: Heal pokemon 3: Quit hospital. ')
         if hospital_decision == '1':
             hosp_poke.revive()
         if hospital_decision == '2':
@@ -80,7 +81,7 @@ def quit(player):
 
 def print_options(options):
     for key, value in options.items():
-        print(key, value[0])
+        print(f'{key}: {value[0]}')
 
 
 def select_pokemon(pokedex):
@@ -111,7 +112,7 @@ class Game:
     def play(self):
         print("Choose starter pokemon:")
         for index, pokemon in enumerate(grass):
-            print(f"{index} = {pokemon['name']}")
+            print(f"{index}: {pokemon['name']}")
         poke = select_pokemon(grass)
         self.player.get_pokemon(poke)
         while True:

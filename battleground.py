@@ -15,6 +15,7 @@ def battle_arena(pretendent: Pokemon, champion: Pokemon) -> None:
 def battleground(player: HumanPlayer, computer: Player):
     print("Choose one starting pokemon: ")
     old_player_pokemon = player.choose_pokemon()
+    old_player_pokemon.trainer = player
     old_pc_pokemon = computer.choose_pokemon()
     while player.can_fight() and computer.can_fight():
         battle_arena(old_player_pokemon, old_pc_pokemon)
@@ -26,6 +27,8 @@ def battleground(player: HumanPlayer, computer: Player):
             print(f"Your pokemon({old_player_pokemon.name}) lost")
             new_player_pokemon = player.choose_pokemon()
             old_player_pokemon = new_player_pokemon
+            if player.can_fight():
+                old_player_pokemon.trainer = player
     if player.can_fight():
         print(f"Your pokemons win with {computer.name}. PogU")
     else:

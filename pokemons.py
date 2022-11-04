@@ -1,17 +1,17 @@
 from pokemon import PokemonType
 from ability import Ability, AbilityType
 
-razor_leaf = Ability('razor_leaf', 55, 95, AbilityType.GRASS)
-frenzy_plant = Ability('frenzy_plant', 150, 90, AbilityType.GRASS)
-grass_knot = Ability('grass_knot', 80, 100, AbilityType.GRASS)
+razor_leaf = Ability('razor_leaf', 55, 95, AbilityType.GRASS, 1)
+frenzy_plant = Ability('frenzy_plant', 150, 90, AbilityType.GRASS, 1 )
+grass_knot = Ability('grass_knot', 80, 100, AbilityType.GRASS, 1)
 
-surf = Ability('surf', 90, 100, AbilityType.WATER)
-hydro_cannon = Ability('hydro_cannon', 150, 90, AbilityType.WATER)
-water_gun = Ability('water_gun', 40, 100, AbilityType.WATER)
+surf = Ability('surf', 90, 100, AbilityType.WATER, 1)
+hydro_cannon = Ability('hydro_cannon', 150, 90, AbilityType.WATER, 1)
+water_gun = Ability('water_gun', 40, 100, AbilityType.WATER, 1)
 
-overheat = Ability('overheat', 130, 90, AbilityType.FIRE)
-blast_burn = Ability('blast_burn', 150, 90, AbilityType.FIRE)
-flamethrower = Ability('flamethrower', 90, 100, AbilityType.FIRE)
+overheat = Ability('overheat', 130, 90, AbilityType.FIRE, 1)
+blast_burn = Ability('blast_burn', 150, 90, AbilityType.FIRE, 1)
+flamethrower = Ability('flamethrower', 90, 100, AbilityType.FIRE, 1)
 
 bulbasaur = {'name': 'bulbasaur', 'damage': 49, 'max_hp': 450, 'speed': 45,
              'type': [PokemonType.GRASS, PokemonType.POISON], 'abilities': [razor_leaf, frenzy_plant]}
@@ -40,6 +40,6 @@ mewtwo = {'name': 'mewtwo', 'damage': 250, 'max_hp': 750, 'speed': 120,
 
 grass = [bulbasaur, squirtle, charmander, chikorita, totodile, cyndaquil]
 
-lake = [lapras, arcanine, koffing]
+lake = [squirtle]
 
 cave = [mewtwo]
